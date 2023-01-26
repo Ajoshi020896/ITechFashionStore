@@ -49,8 +49,6 @@ public class Order {
 
 	@Column(name = "delievery_by")
 	private String delieveryBy;
-
-	
 	
 	@OneToOne(targetEntity = Customer.class ,cascade = CascadeType.ALL)
 	private Customer customer;

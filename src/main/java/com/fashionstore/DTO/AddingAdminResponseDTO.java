@@ -22,7 +22,5 @@ private long adminId;
 	private String adminAddress;
 	private Date createdDate;	
 	private long adminMobileNo;
-
 	
-
 }
