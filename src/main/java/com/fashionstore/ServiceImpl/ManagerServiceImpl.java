@@ -172,5 +172,14 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		return employeeResponse;
 	}
+@Override
+	public OrderResponseWithSprinterDTO getOrderDetailsWithSprinter(Long orderId) {
+		
+		System.out.println("RestTemplate Call");
+		
+		OrderResponseWithSprinterDTO forObject = restTemplate.getForObject(url+orderId, OrderResponseWithSprinterDTO.class);
+		return forObject;
+	}
+
 
 }
