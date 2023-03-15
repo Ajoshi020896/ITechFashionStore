@@ -8,7 +8,6 @@ import com.fashionstore.DTO.AddingManagerDTO;
 import com.fashionstore.DTO.AdminLoginDTO;
 import com.fashionstore.DTO.ManagerResponseDTO;
 import com.fashionstore.DTO.UpdatedManagerResponseDTO;
-import com.fashionstore.Entities.Admin;
 import com.fashionstore.Entities.Manager;
 
 public interface AdminService {
@@ -19,7 +18,7 @@ public interface AdminService {
 
 	Manager addManager(AddingManagerDTO addingManagerDTO);
 	
-	List<ManagerResponseDTO> getAllManagers();
+	List<ManagerResponseDTO> getAllManagers();	
 	
 	ManagerResponseDTO getManagerById(Long managerId);
 	

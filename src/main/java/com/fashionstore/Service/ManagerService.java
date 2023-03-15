@@ -10,6 +10,8 @@ import com.fashionstore.DTO.AddingManagerDTO;
 import com.fashionstore.DTO.EmployeeResponseDTO;
 import com.fashionstore.DTO.ManagerLoginRequestDTO;
 import com.fashionstore.DTO.ManagerResponseDTO;
+import com.fashionstore.DTO.OrderResponseDTO;
+import com.fashionstore.DTO.OrderResponseWithSprinterDTO;
 import com.fashionstore.DTO.UpdatedEmployeeResponseDTO;
 import com.fashionstore.DTO.UpdatedManagerResponseDTO;
 import com.fashionstore.Entities.Employee;
@@ -30,6 +32,12 @@ public interface ManagerService {
 	UpdatedEmployeeResponseDTO updateEmployee(Employee employee);
 
 	List<AddingEmployeeResponseDto> getAllemployees();
+
+	OrderResponseWithSprinterDTO getOrderDetailsWithSprinter(Long orderId);
+
+
+
+	
 
 	
 

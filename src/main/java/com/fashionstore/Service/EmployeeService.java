@@ -11,14 +11,7 @@ import com.fashionstore.Entities.Employee;
 import com.fashionstore.Entities.Manager;
 
 public interface EmployeeService {
-	
-	
-	
-
-	
 
 	String employeeLogin(EmployeeLoginDTO employeeLoginDto);
-
-	
 
 }

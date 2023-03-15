@@ -7,22 +7,32 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.fashionstore.DTO.AddingEmployeeRequestDto;
 import com.fashionstore.DTO.AddingEmployeeResponseDto;
 import com.fashionstore.DTO.AddingManagerDTO;
+import com.fashionstore.DTO.CustomerOrderResponseDTO;
 import com.fashionstore.DTO.EmployeeResponseDTO;
 import com.fashionstore.DTO.ManagerLoginRequestDTO;
 import com.fashionstore.DTO.ManagerResponseDTO;
+import com.fashionstore.DTO.OrderResponseDTO;
+import com.fashionstore.DTO.OrderResponseWithSprinterDTO;
+import com.fashionstore.DTO.SprinterOrderResponseDTO;
 import com.fashionstore.DTO.UpdatedEmployeeResponseDTO;
 import com.fashionstore.DTO.UpdatedManagerResponseDTO;
+import com.fashionstore.Entities.Customer;
 import com.fashionstore.Entities.Employee;
 import com.fashionstore.Entities.Manager;
+import com.fashionstore.Entities.Order;
+import com.fashionstore.Entities.Sprinter;
 import com.fashionstore.Exception.BusinessException;
 import com.fashionstore.Exception.EntityNotFoundException;
 import com.fashionstore.Repository.EmployeeRepository;
 import com.fashionstore.Repository.ManagerRepository;
+import com.fashionstore.Repository.OrderRepository;
 import com.fashionstore.Service.ManagerService;
 
 @Service
@@ -36,6 +46,15 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Autowired
 	private ModelMapper modelMapper;
+
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@Autowired
+	private OrderRepository orderRespository;
+
+	@Value("${order.akash}")
+	private String url;
 
 	@Override
 	public String managerLogin(ManagerLoginRequestDTO managerLoginRequestDTO) {
@@ -77,7 +96,7 @@ public class ManagerServiceImpl implements ManagerService {
 		response.setEmployeeEmail(employee2.getEmployeeEmail());
 		response.setEmployeeMobileNo(employee2.getEmployeeMobileNo());
 		response.setEmployeeAddress(employee2.getEmployeeAddress());
-		
+
 		return response;
 
 	}
@@ -129,12 +148,12 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public String deleteEmployeeById(Long employeeId) {
-		
-		Optional<Employee> optionalEmployee=employeeRepository.findById(employeeId);
-		
-		if(optionalEmployee.isEmpty()) {
-			
-			throw new EntityNotFoundException("601","employee not Found");
+
+		Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
+
+		if (optionalEmployee.isEmpty()) {
+
+			throw new EntityNotFoundException("601", "employee not Found");
 		}
 
 		employeeRepository.deleteById(employeeId);
@@ -161,25 +180,62 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public List<AddingEmployeeResponseDto> getAllemployees() {
-	
-		List<Employee> employees=employeeRepository.findAll();
-		
-		if(employees.isEmpty()) {
-			
-			throw new EntityNotFoundException("601","No employees Found");
+
+		List<Employee> employees = employeeRepository.findAll();
+
+		if (employees.isEmpty()) {
+
+			throw new EntityNotFoundException("601", "No employees Found");
 		}
-		List<AddingEmployeeResponseDto> employeeResponse=employees.stream().map(response -> modelMapper.map(response, AddingEmployeeResponseDto.class)).collect(Collectors.toList());
-		
+		List<AddingEmployeeResponseDto> employeeResponse = employees.stream()
+				.map(response -> modelMapper.map(response, AddingEmployeeResponseDto.class))
+				.collect(Collectors.toList());
+
 		return employeeResponse;
 	}
-@Override
+
+	@Override
 	public OrderResponseWithSprinterDTO getOrderDetailsWithSprinter(Long orderId) {
-		
+
 		System.out.println("RestTemplate Call");
 		
-		OrderResponseWithSprinterDTO forObject = restTemplate.getForObject(url+orderId, OrderResponseWithSprinterDTO.class);
-		return forObject;
+		OrderResponseWithSprinterDTO finalResponse = new OrderResponseWithSprinterDTO();
+
+		OrderResponseDTO responseFromRest = restTemplate.getForObject(url + orderId,
+				OrderResponseDTO.class);
+		
+		Order dbOrder;
+		
+		Optional<Order> optionalOrder=orderRespository.findById(orderId);
+		if(optionalOrder.isEmpty()) {
+			
+			throw new EntityNotFoundException("404","Order with Id "+orderId+" not present");
+		}
+		else {
+			dbOrder=optionalOrder.get();
+		}
+			
+		Sprinter dbSprinter=dbOrder.getSprinter();
+		SprinterOrderResponseDTO sprinterResponse=new SprinterOrderResponseDTO();
+		
+		finalResponse.setOrderId(responseFromRest.getOrderId());
+        finalResponse.setOrderType(responseFromRest.getOrderType());
+        finalResponse.setOrderDate(responseFromRest.getOrderDate());
+        finalResponse.setDelieveryDate(responseFromRest.getDeliveryDate());
+        finalResponse.setCustomerOrderResponseDto(responseFromRest.getCustomerOrderResponseDTO());
+        
+        sprinterResponse.setSprinterId(dbSprinter.getSprinterId());
+        sprinterResponse.setSprinterName(dbSprinter.getSprinterName());
+        sprinterResponse.setSprinterMobileNo(dbSprinter.getSprinterMobileNo());
+        sprinterResponse.setSprinterConvenceType(dbSprinter.getSprinterConvenceType());
+        
+        finalResponse.setSprinterOrderResponseDTO(sprinterResponse);
+        finalResponse.setProductResponse(dbOrder.getProducts());
+        
+		return finalResponse;
 	}
 
-
+	
 }
+
+	

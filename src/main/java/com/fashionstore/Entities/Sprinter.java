@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,4 +34,7 @@ public class Sprinter {
 	
 	@Column(name="sprinter_convence_type")
 	private String sprinterConvenceType;
+	
+	@OneToOne
+	private Manager manager;
 }

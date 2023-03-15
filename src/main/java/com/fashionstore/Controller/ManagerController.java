@@ -20,6 +20,8 @@ import com.fashionstore.DTO.AddingManagerDTO;
 import com.fashionstore.DTO.EmployeeResponseDTO;
 import com.fashionstore.DTO.ManagerLoginRequestDTO;
 import com.fashionstore.DTO.ManagerResponseDTO;
+import com.fashionstore.DTO.OrderResponseDTO;
+import com.fashionstore.DTO.OrderResponseWithSprinterDTO;
 import com.fashionstore.DTO.UpdatedEmployeeResponseDTO;
 import com.fashionstore.DTO.UpdatedManagerResponseDTO;
 import com.fashionstore.Entities.Employee;
@@ -163,6 +165,30 @@ public class ManagerController {
 		}
 
 		catch (Exception e) {
+
+			ControllerException ce = new ControllerException("601", "something wrong with Controller layer");
+			return new ResponseEntity<String>(ce.getErrorDescription(), HttpStatus.BAD_REQUEST);
+
+		}
+	}
+	
+	
+	@GetMapping("/getOrderDetailsWithSprinter/{id}")
+	public ResponseEntity<?> getOrderDetailsWithSprinter(@PathVariable("id") Long orderId) {
+		try {
+			OrderResponseWithSprinterDTO response = managerService.getOrderDetailsWithSprinter(orderId);
+			return new ResponseEntity<OrderResponseWithSprinterDTO>(response, HttpStatus.FOUND);
+		}
+
+		catch (EntityNotFoundException e) {
+
+			ControllerException ce = new ControllerException(e.getErrorCode(),e.getErrorDescription() );
+			return new ResponseEntity<String>(ce.getErrorDescription(), HttpStatus.BAD_REQUEST);
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
 
 			ControllerException ce = new ControllerException("601", "something wrong with Controller layer");
 			return new ResponseEntity<String>(ce.getErrorDescription(), HttpStatus.BAD_REQUEST);

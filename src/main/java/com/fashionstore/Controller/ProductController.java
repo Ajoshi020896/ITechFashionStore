@@ -47,7 +47,7 @@ public class ProductController {
 		try {
 
 			List<Product> productResponse = productService.getAllProducts();
-			return new ResponseEntity<List<Product>>(productResponse, HttpStatus.FOUND);
+			return new ResponseEntity<List<Product>>(productResponse, HttpStatus.OK);
 		} catch (EntityNotFoundException e) {
 
 			return new ResponseEntity<String>("Products list is empty", HttpStatus.BAD_REQUEST);

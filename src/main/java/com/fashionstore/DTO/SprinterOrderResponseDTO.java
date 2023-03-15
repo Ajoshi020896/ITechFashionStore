@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SprinterOrderResponseDTO {
 	
+	private Long sprinterId;
 	private String sprinterName;
 	private Long sprinterMobileNo;
 	private String sprinterConvenceType;
