@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,6 +31,7 @@ import com.fashionstore.Entities.Order;
 import com.fashionstore.Entities.Sprinter;
 import com.fashionstore.Exception.BusinessException;
 import com.fashionstore.Exception.EntityNotFoundException;
+import com.fashionstore.FeignClient.FeignServiceSprinterUtil;
 import com.fashionstore.Repository.EmployeeRepository;
 import com.fashionstore.Repository.ManagerRepository;
 import com.fashionstore.Repository.OrderRepository;
@@ -52,6 +54,9 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Autowired
 	private OrderRepository orderRespository;
+	
+	@Autowired
+	private FeignServiceSprinterUtil feignServiceSprinterUtil;
 
 	@Value("${order.akash}")
 	private String url;
@@ -233,6 +238,11 @@ public class ManagerServiceImpl implements ManagerService {
         finalResponse.setProductResponse(dbOrder.getProducts());
         
 		return finalResponse;
+	}
+
+	@Override
+	public ResponseEntity<?> getAllProductsFromSprinter() {
+		return feignServiceSprinterUtil.getallproductsbysprinter();
 	}
 
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fashionstore.DTO.AddingAdminDTO;
@@ -14,6 +15,7 @@ import com.fashionstore.DTO.ManagerResponseDTO;
 import com.fashionstore.Entities.Customer;
 import com.fashionstore.Entities.Manager;
 import com.fashionstore.Exception.EntityNotFoundException;
+import com.fashionstore.FeignClient.FeignServiceSprinterUtil;
 import com.fashionstore.Repository.CustomerRepository;
 import com.fashionstore.Service.CustomerService;
 
@@ -22,6 +24,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private CustomerRepository customerRepository;
+	
+	@Autowired
+	private FeignServiceSprinterUtil feignServiceSprinterUtil;
 
 	@Override
 	public CustomerResponseDTO addCustomer(AddingCustomerDTO addingCustomerDTO) {
@@ -92,6 +97,12 @@ public class CustomerServiceImpl implements CustomerService {
 		Customer updatedCustomer = customerRepository.save(customer);
 		
 		return updatedCustomer;
+	}
+
+	@Override
+	public ResponseEntity<?> getAllProductsFromSprinter() {
+		
+		return feignServiceSprinterUtil.getallproductsbysprinter();
 	}
 
 }

@@ -5,10 +5,10 @@ public class ControllerException  extends RuntimeException{
 	private String errorCode;
 	private String errorDescription;
 	
-	public String getErrorCodeString() {
+	public String getErrorCode() {
 		return errorCode;
 	}
-	public void setErrorCodeString(String errorCodeString) {
+	public void setErrorCode(String errorCodeString) {
 		this.errorCode = errorCodeString;
 	}
 	public String getErrorDescription() {
@@ -18,9 +18,9 @@ public class ControllerException  extends RuntimeException{
 		this.errorDescription = errorDescription;
 	}
 	
-	public ControllerException(String errorCodeString, String errorDescription) {
+	public ControllerException(String errorCode, String errorDescription) {
 		super();
-		this.errorCode = errorCodeString;
+		this.errorCode = errorCode;
 		this.errorDescription = errorDescription;
 	}
 	

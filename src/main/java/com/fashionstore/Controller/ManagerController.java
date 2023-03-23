@@ -195,4 +195,25 @@ public class ManagerController {
 
 		}
 	}
+	
+	@GetMapping("/getallproductsfromsprinter")
+	public ResponseEntity<?> getAllProductsFromSprinter() {
+		try {
+			ResponseEntity<?> responseDto = managerService.getAllProductsFromSprinter();
+			return new ResponseEntity<>(responseDto.getBody(), HttpStatus.OK);
+		}
+
+		catch (EntityNotFoundException e) {
+
+			ControllerException ce = new ControllerException("400", e.getMessage());
+			return new ResponseEntity<String>(ce.getErrorCode(), HttpStatus.BAD_REQUEST);
+		}
+
+		catch (Exception e) {
+
+			ControllerException ce = new ControllerException("404", "something wrong with Controller layer");
+			return new ResponseEntity<String>(ce.getErrorCode(), HttpStatus.BAD_REQUEST);
+
+		}
+	}
 }

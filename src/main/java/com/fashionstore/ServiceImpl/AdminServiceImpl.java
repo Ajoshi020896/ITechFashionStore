@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fashionstore.DTO.AddingAdminDTO;
@@ -19,6 +20,7 @@ import com.fashionstore.Entities.Admin;
 import com.fashionstore.Entities.Manager;
 import com.fashionstore.Exception.BusinessException;
 import com.fashionstore.Exception.EntityNotFoundException;
+import com.fashionstore.FeignClient.FeignServiceSprinterUtil;
 import com.fashionstore.Repository.AdminRepository;
 import com.fashionstore.Repository.ManagerRepository;
 import com.fashionstore.Service.AdminService;
@@ -34,6 +36,9 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	@Autowired
+	private FeignServiceSprinterUtil feignServiceSprinterUtil;
 
 	// adding admin data
 	public AddingAdminResponseDTO addAdmin(AddingAdminDTO admin1) {
@@ -196,6 +201,14 @@ public class AdminServiceImpl implements AdminService {
 		updatedResponse.setManagerId(updatedManager.getManagerId());
 
 		return updatedResponse;
+	}
+
+	@Override
+	public ResponseEntity<?> getAllProductsFromSprinter() {
+		
+		ResponseEntity<?> finalResponse=feignServiceSprinterUtil.getallproductsbysprinter();
+		return finalResponse;
+	
 	}
 
 }

@@ -2,6 +2,8 @@ package com.fashionstore.Service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.fashionstore.DTO.AddingAdminDTO;
 import com.fashionstore.DTO.AddingCustomerDTO;
 import com.fashionstore.DTO.CustomerResponseDTO;
@@ -18,5 +20,7 @@ public interface CustomerService {
 	String deleteCustomerById(Long customerId);
 
 	Customer updateCustomer(Customer customer);
+
+	ResponseEntity<?> getAllProductsFromSprinter();
 
 }

@@ -2,6 +2,7 @@ package com.fashionstore.Service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fashionstore.DTO.AddingEmployeeRequestDto;
@@ -34,6 +35,8 @@ public interface ManagerService {
 	List<AddingEmployeeResponseDto> getAllemployees();
 
 	OrderResponseWithSprinterDTO getOrderDetailsWithSprinter(Long orderId);
+
+	ResponseEntity<?> getAllProductsFromSprinter();
 
 
 

@@ -2,6 +2,8 @@ package com.fashionstore.Service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.fashionstore.DTO.AddingAdminDTO;
 import com.fashionstore.DTO.AddingAdminResponseDTO;
 import com.fashionstore.DTO.AddingManagerDTO;
@@ -25,5 +27,7 @@ public interface AdminService {
 	String deleteManagerById(Long managerId);
 	
 	UpdatedManagerResponseDTO updateManager(Manager manager);
+
+	ResponseEntity<?> getAllProductsFromSprinter();
 
 }

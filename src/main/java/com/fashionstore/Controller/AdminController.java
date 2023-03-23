@@ -168,5 +168,26 @@ public class AdminController {
 
 		}
 	}
+	
+	@GetMapping("/getallproductsfromsprinter")
+	public ResponseEntity<?> getAllProductsFromSprinter() {
+		try {
+			ResponseEntity<?> responseDto = adminService.getAllProductsFromSprinter();
+			return new ResponseEntity<>(responseDto.getBody(), HttpStatus.FOUND);
+		}
+
+		catch (EntityNotFoundException e) {
+
+			ControllerException ce = new ControllerException("601", e.getMessage());
+			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
+		}
+
+		catch (Exception e) {
+
+			ControllerException ce = new ControllerException("404", "something wrong with Controller layer");
+			return new ResponseEntity<String>(ce.getErrorCode(), HttpStatus.BAD_REQUEST);
+
+		}
+	}
 
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fashionstore.DTO.AddingEmployeeRequestDto;
@@ -18,6 +19,7 @@ import com.fashionstore.DTO.UpdatedManagerResponseDTO;
 import com.fashionstore.Entities.Employee;
 import com.fashionstore.Entities.Manager;
 import com.fashionstore.Exception.EntityNotFoundException;
+import com.fashionstore.FeignClient.FeignServiceSprinterUtil;
 import com.fashionstore.Repository.EmployeeRepository;
 import com.fashionstore.Service.EmployeeService;
 
@@ -29,10 +31,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private ModelMapper modelMapper;
-
 	
-
-	
+	@Autowired
+	private FeignServiceSprinterUtil feignServiceSprinterUtil;
 
 	@Override
 	public String employeeLogin(EmployeeLoginDTO employeeLoginDto) {
@@ -50,6 +51,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 			return "Welcome to the Login Page " + employeeDb.getEmployeeName();
 		}
+	}
+
+	@Override
+	public ResponseEntity<?> getAllProductsFromSprinter() {
+		return feignServiceSprinterUtil.getallproductsbysprinter();
 	}
 }
 
