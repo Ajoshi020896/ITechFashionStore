@@ -7,7 +7,7 @@
 		<version>2.7.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.Store</groupId>
+	<groupId>com.fashionstore</groupId>
 	<artifactId>ITechFashionStore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ITechFashionStore</name>
@@ -17,6 +17,13 @@
 		<spring-cloud.version>2021.0.4</spring-cloud.version>
 	</properties>
 	<dependencies>
+
+		<!-- Eureka client dependency -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
 		<dependency>
