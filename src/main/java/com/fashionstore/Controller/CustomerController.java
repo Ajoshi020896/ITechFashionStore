@@ -31,7 +31,7 @@ import com.fashionstore.Service.ProductService;
 import lombok.Getter;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("itechfashionstore/customer")
 public class CustomerController {
 
 	@Autowired

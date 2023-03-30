@@ -17,7 +17,7 @@ import com.fashionstore.Repository.OrderRepository;
 import com.fashionstore.Service.OrderService;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("itechfashionstore/order")
 public class OrderController {
 
 	@Autowired

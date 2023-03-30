@@ -242,6 +242,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public ResponseEntity<?> getAllProductsFromSprinter() {
+		System.out.println("Inside ServiceImpl of manager");
 		return feignServiceSprinterUtil.getallproductsbysprinter();
 	}
 

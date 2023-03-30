@@ -40,6 +40,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product getProductById(Long productId) {
+		System.out.println("Inside ServiceImpl of product ");
 		
 		Optional<Product> optionalProduct=productRepository.findById(productId);
 		

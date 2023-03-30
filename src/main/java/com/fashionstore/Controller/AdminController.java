@@ -28,7 +28,7 @@ import com.fashionstore.Service.AdminService;
 import com.fashionstore.Exception.EntityNotFoundException;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("itechfashionstore/admin")
 public class AdminController {
 
 	@Autowired

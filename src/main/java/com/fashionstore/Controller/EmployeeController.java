@@ -27,7 +27,7 @@ import com.fashionstore.Exception.EntityNotFoundException;
 import com.fashionstore.Service.EmployeeService;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("itechfashionstore/employee")
 public class EmployeeController {
 
 	@Autowired

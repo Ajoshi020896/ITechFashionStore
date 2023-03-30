@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient(value = "SprinterFeign", url = "http://localhost:8082/sprinter")
+@FeignClient(value = "SprinterFeign", url = "http://localhost:8082/itechfashionstoreservice1/sprinter")
 public interface FeignServiceSprinterUtil {
 	
 	@GetMapping("/getallproductsbysprinter")

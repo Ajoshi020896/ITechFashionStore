@@ -31,7 +31,7 @@ import com.fashionstore.Exception.ControllerException;
 import com.fashionstore.Service.ManagerService;
 
 @RestController
-@RequestMapping("/manager")
+@RequestMapping("itechfashionstore/manager")
 public class ManagerController {
 
 	@Autowired
@@ -199,6 +199,7 @@ public class ManagerController {
 	@GetMapping("/getallproductsfromsprinter")
 	public ResponseEntity<?> getAllProductsFromSprinter() {
 		try {
+			System.out.println("Inside manager controller");
 			ResponseEntity<?> responseDto = managerService.getAllProductsFromSprinter();
 			return new ResponseEntity<>(responseDto.getBody(), HttpStatus.OK);
 		}
@@ -211,7 +212,7 @@ public class ManagerController {
 
 		catch (Exception e) {
 
-			ControllerException ce = new ControllerException("404", "something wrong with Controller layer");
+			ControllerException ce = new ControllerException("400", "something wrong with Controller layer");
 			return new ResponseEntity<String>(ce.getErrorCode(), HttpStatus.BAD_REQUEST);
 
 		}

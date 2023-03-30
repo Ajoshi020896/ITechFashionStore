@@ -18,7 +18,7 @@ import com.fashionstore.Exception.EntityNotFoundException;
 import com.fashionstore.Service.ProductService;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("itechfashionstore/product")
 public class ProductController {
 
 	@Autowired
@@ -45,7 +45,7 @@ public class ProductController {
 	public ResponseEntity<?> getAllProducts() {
 
 		try {
-
+             System.out.println("Inside Product Controller");
 			List<Product> productResponse = productService.getAllProducts();
 			return new ResponseEntity<List<Product>>(productResponse, HttpStatus.OK);
 		} catch (EntityNotFoundException e) {

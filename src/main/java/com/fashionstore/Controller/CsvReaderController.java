@@ -14,7 +14,7 @@ import com.fashionstore.Helper.CSVHelper;
 import com.fashionstore.Service.CsvReaderService;
 
 @RestController
-@RequestMapping("/csv")
+@RequestMapping("itechfashionstore/csv")
 public class CsvReaderController {
 
 	@Autowired
