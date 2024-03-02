@@ -146,7 +146,6 @@ public class AdminController {
 		}
 
 		catch (Exception e) {
-
 			ControllerException ce = new ControllerException("601", "something wrong with Controller layer");
 			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
 
