@@ -160,7 +160,6 @@ public class AdminController {
 			UpdatedManagerResponseDTO response = adminService.updateManager(manager);
 			return new ResponseEntity<UpdatedManagerResponseDTO>(response, HttpStatus.OK);
 		}
-
 		catch (Exception e) {
 
 			ControllerException ce = new ControllerException("601", "something wrong with Controller layer");
