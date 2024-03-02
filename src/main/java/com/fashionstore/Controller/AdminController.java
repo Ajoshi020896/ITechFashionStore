@@ -182,5 +182,4 @@ public class AdminController {
 			return new ResponseEntity<String>(ce.getErrorCode(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
 }
