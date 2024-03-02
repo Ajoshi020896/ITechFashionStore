@@ -175,7 +175,6 @@ public class AdminController {
 			ResponseEntity<?> responseDto = adminService.getAllProductsFromSprinter();
 			return new ResponseEntity<>(responseDto.getBody(), HttpStatus.FOUND);
 		}
-
 		catch (EntityNotFoundException e) {
 
 			ControllerException ce = new ControllerException("601", e.getMessage());
